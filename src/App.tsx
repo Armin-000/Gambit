@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -167,7 +167,18 @@ export default function App() {
       <header className="site-header">
         <div className="container header-inner">
           <a href="#top" className="brand">
-            <div className="brand-mark">G</div>
+            <div className="logo">
+              <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill="#3B88C3"
+                  d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"
+                />
+                <path
+                  fill="#FFF"
+                  d="M25.66 15.915c1.953 0 2.729.992 2.729 2.977c0 5.984-3.906 10.48-10.108 10.48c-6.294 0-10.666-4.992-10.666-11.41c0-6.449 4.341-11.41 10.666-11.41c4.682 0 8.526 2.201 8.526 4.372c0 1.333-.836 2.17-1.922 2.17c-2.108 0-2.542-2.263-6.604-2.263c-3.875 0-5.829 3.379-5.829 7.131c0 3.782 1.892 7.132 5.829 7.132c2.45 0 5.272-1.365 5.272-4.899h-3.164c-1.271 0-2.17-.899-2.17-2.17c0-1.302.992-2.108 2.17-2.108h5.271z"
+                />
+              </svg>
+            </div>
             <div className="brand-text">
               <div className="brand-title">Gambit</div>
               <div className="brand-subtitle">INSTALACIJE D.O.O</div>
@@ -186,10 +197,6 @@ export default function App() {
             <a href="tel:+385992130174" className="phone-link desktop-phone">
               <Phone size={16} />
               <span>Nazovite nas</span>
-            </a>
-
-            <a href="#kontakt" className="btn btn-primary desktop-quote-btn">
-              Zatraži ponudu
             </a>
 
             <button
@@ -289,8 +296,9 @@ export default function App() {
 
               <p className="hero-text">
                 Gambit Instalacije d.o.o. pruža usluge vodoinstalacija, sustava
-                grijanja, podnog grijanja, plinskih instalacija, solarnih sustava,
-                kotlovnica i sanitarnih rješenja uz pouzdan i profesionalan pristup radu.
+                grijanja, podnog grijanja, plinskih instalacija, solarnih
+                sustava, kotlovnica i sanitarnih rješenja uz pouzdan i
+                profesionalan pristup radu.
               </p>
 
               <div className="hero-buttons">
@@ -576,7 +584,10 @@ export default function App() {
                   procjenu radova ili dodatne informacije o uslugama.
                 </p>
 
-                <a href="tel:+385992130174" className="btn btn-primary contact-cta-button">
+                <a
+                  href="tel:+385992130174"
+                  className="btn btn-primary contact-cta-button"
+                >
                   <Phone size={16} />
                   Nazovite odmah
                 </a>
@@ -584,6 +595,57 @@ export default function App() {
             </div>
           </div>
         </section>
+        <footer className="site-footer">
+          <div className="container footer-inner">
+            <div className="footer-content">
+              <div className="footer-left">
+                <a href="#top" className="footer-brand-wrap">
+                  <div className="logo footer-logo">
+                    <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        fill="#3B88C3"
+                        d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"
+                      />
+                      <path
+                        fill="#FFF"
+                        d="M25.66 15.915c1.953 0 2.729.992 2.729 2.977c0 5.984-3.906 10.48-10.108 10.48c-6.294 0-10.666-4.992-10.666-11.41c0-6.449 4.341-11.41 10.666-11.41c4.682 0 8.526 2.201 8.526 4.372c0 1.333-.836 2.17-1.922 2.17c-2.108 0-2.542-2.263-6.604-2.263c-3.875 0-5.829 3.379-5.829 7.131c0 3.782 1.892 7.132 5.829 7.132c2.45 0 5.272-1.365 5.272-4.899h-3.164c-1.271 0-2.17-.899-2.17-2.17c0-1.302.992-2.108 2.17-2.108h5.271z"
+                      />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <div className="footer-brand">Gambit Instalacije d.o.o.</div>
+                    <div className="footer-note">Vodoinstalacije, grijanje i sanitarna rješenja</div>
+                  </div>
+                </a>
+              </div>
+
+              <div className="footer-center">
+                <a href="#o-nama" className="footer-link">O nama</a>
+                <a href="#usluge" className="footer-link">Usluge</a>
+                <a href="#zasto-nas" className="footer-link">Zašto nas</a>
+                <a href="#kontakt" className="footer-link">Kontakt</a>
+              </div>
+
+              <div className="footer-right">
+                <a href="tel:+385992130174" className="footer-link">+385 99 213 0174</a>
+                <a href="mailto:gambitinstalacije@gmail.com" className="footer-link">
+                  gambitinstalacije@gmail.com
+                </a>
+                <span className="footer-text">Zorzići 42e, Viškovo</span>
+              </div>
+            </div>
+
+            <div className="footer-bottom">
+              <span className="footer-text">
+                © {new Date().getFullYear()} Gambit Instalacije d.o.o. Sva prava pridržana.
+              </span>
+              <a href="#top" className="footer-back-top">
+                Povratak na vrh
+              </a>
+            </div>
+          </div>
+        </footer>
       </main>
     </div>
   );
