@@ -23,6 +23,11 @@ import {
 } from "lucide-react";
 import "./App.css";
 
+import kotlovnicaImg from "./assets/kotlovnica.webp";
+import podnoGrijanjeImg from "./assets/podnogrijanje.webp";
+import kupaonicaImg from "./assets/kupaonica.webp";
+import solarImg from "./assets/solar.webp";
+
 const navItems = [
   { label: "O nama", href: "#o-nama" },
   { label: "Usluge", href: "#usluge" },
@@ -150,17 +155,42 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
+type GalleryItem = {
+  title: string;
+  image: string;
+};
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen || selectedImage ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuOpen]);
+  }, [menuOpen, selectedImage]);
 
   const handleNavClick = () => setMenuOpen(false);
+
+  const gallery: GalleryItem[] = [
+    {
+      title: "Kotlovnica",
+      image: kotlovnicaImg,
+    },
+    {
+      title: "Podno grijanje",
+      image: podnoGrijanjeImg,
+    },
+    {
+      title: "Kupaonica",
+      image: kupaonicaImg,
+    },
+    {
+      title: "Solarni paneli",
+      image: solarImg,
+    },
+  ];
 
   return (
     <div className="site-shell">
@@ -338,7 +368,7 @@ export default function App() {
             >
               <img
                 className="about-image"
-                src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1200&q=80"
+                src={kupaonicaImg}
                 alt="Moderna kupaonica"
               />
               <div className="about-floating-card">
@@ -369,9 +399,9 @@ export default function App() {
 
               <p className="section-text">
                 Gambit Instalacije d.o.o. je tvrtka iz Saršona kraj Rijeke koja
-                se više od četrdeset godina bavi izvođenjem vodoinstalaterskih
-                radova, sustava grijanja, plinskih instalacija i uređenjem
-                sanitarnih prostora.
+                se više od dvadeset i pet godina bavi izvođenjem
+                vodoinstalaterskih radova, sustava grijanja, plinskih
+                instalacija i uređenjem sanitarnih prostora.
               </p>
 
               <p className="section-text">
@@ -397,6 +427,41 @@ export default function App() {
                 })}
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        <section className="section light-section">
+          <div className="container">
+            <div className="section-head section-head-center">
+              <div className="section-kicker section-kicker-center">
+                <span className="kicker-line" />
+                <span>Naši radovi</span>
+              </div>
+
+              <h2 className="section-title section-title-center">
+                Primjeri izvedenih projekata
+              </h2>
+            </div>
+
+            <div className="gallery-grid">
+              {gallery.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  className="gallery-card"
+                  onClick={() => setSelectedImage(item)}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                >
+                  <img src={item.image} alt={item.title} />
+                  <div className="gallery-overlay">
+                    <span>{item.title}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -595,6 +660,43 @@ export default function App() {
             </div>
           </div>
         </section>
+
+<AnimatePresence>
+  {selectedImage && (
+    <>
+      <motion.div
+        className="lightbox-backdrop"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setSelectedImage(null)}
+      />
+
+      <div className="lightbox-shell" onClick={() => setSelectedImage(null)}>
+        <motion.div
+          className="lightbox-content"
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.92 }}
+          transition={{ duration: 0.25 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <img src={selectedImage.image} alt={selectedImage.title} />
+          <div className="lightbox-caption">{selectedImage.title}</div>
+
+          <button
+            className="lightbox-close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Zatvori sliku"
+          >
+            <X size={20} />
+          </button>
+        </motion.div>
+      </div>
+    </>
+  )}
+</AnimatePresence>
+
         <footer className="site-footer">
           <div className="container footer-inner">
             <div className="footer-content">
@@ -615,21 +717,36 @@ export default function App() {
 
                   <div>
                     <div className="footer-brand">Gambit Instalacije d.o.o.</div>
-                    <div className="footer-note">Vodoinstalacije, grijanje i sanitarna rješenja</div>
+                    <div className="footer-note">
+                      Vodoinstalacije, grijanje i sanitarna rješenja
+                    </div>
                   </div>
                 </a>
               </div>
 
               <div className="footer-center">
-                <a href="#o-nama" className="footer-link">O nama</a>
-                <a href="#usluge" className="footer-link">Usluge</a>
-                <a href="#zasto-nas" className="footer-link">Zašto nas</a>
-                <a href="#kontakt" className="footer-link">Kontakt</a>
+                <a href="#o-nama" className="footer-link">
+                  O nama
+                </a>
+                <a href="#usluge" className="footer-link">
+                  Usluge
+                </a>
+                <a href="#zasto-nas" className="footer-link">
+                  Zašto nas
+                </a>
+                <a href="#kontakt" className="footer-link">
+                  Kontakt
+                </a>
               </div>
 
               <div className="footer-right">
-                <a href="tel:+385992130174" className="footer-link">+385 99 213 0174</a>
-                <a href="mailto:gambitinstalacije@gmail.com" className="footer-link">
+                <a href="tel:+385992130174" className="footer-link">
+                  +385 99 213 0174
+                </a>
+                <a
+                  href="mailto:gambitinstalacije@gmail.com"
+                  className="footer-link"
+                >
                   gambitinstalacije@gmail.com
                 </a>
                 <span className="footer-text">Zorzići 42e, Viškovo</span>
@@ -638,7 +755,8 @@ export default function App() {
 
             <div className="footer-bottom">
               <span className="footer-text">
-                © {new Date().getFullYear()} Gambit Instalacije d.o.o. Sva prava pridržana.
+                © {new Date().getFullYear()} Gambit Instalacije d.o.o. Sva prava
+                pridržana.
               </span>
               <a href="#top" className="footer-back-top">
                 Povratak na vrh
